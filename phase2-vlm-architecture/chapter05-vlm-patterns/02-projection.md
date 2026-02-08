@@ -1,3 +1,6 @@
+---
+---
+
 # 5.2 Projection/Connector 방식
 
 Projection 방식은 VLM 아키텍처 중 가장 단순하면서도 강력한 접근법이다. Vision Encoder의 출력을 Linear Projection이나 MLP로 LLM의 임베딩 공간에 매핑하고, 변환된 visual token을 텍스트 토큰과 함께 LLM에 입력한다. LLaVA가 이 방식의 대표 모델이다.

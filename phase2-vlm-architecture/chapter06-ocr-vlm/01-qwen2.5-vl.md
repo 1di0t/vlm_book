@@ -1,3 +1,6 @@
+---
+---
+
 # 6.1 Qwen2.5-VL 심층 분석
 
 > **Qwen2.5-VL**은 Alibaba Qwen 팀이 2024년에 공개한 Vision-Language Model이다.

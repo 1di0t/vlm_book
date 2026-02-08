@@ -1,3 +1,6 @@
+---
+---
+
 # 2.3 Transformer Block 구성요소
 
 Transformer Block은 Self-Attention만으로 구성되지 않는다. Layer Normalization, Feed-Forward Network, Residual Connection이 함께 작동한다.

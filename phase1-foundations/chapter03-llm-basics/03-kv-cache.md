@@ -1,3 +1,6 @@
+---
+---
+
 # 3.3 KV Cache
 
 Autoregressive generation에서 KV Cache는 필수적인 최적화다. 없으면 토큰 생성마다 전체 시퀀스를 다시 계산해야 한다.

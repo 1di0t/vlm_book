@@ -1,3 +1,6 @@
+---
+---
+
 # 2.4 Encoder vs Decoder
 
 Transformer 아키텍처는 세 가지 변형이 있다. 각각의 특성과 사용처를 이해하자.

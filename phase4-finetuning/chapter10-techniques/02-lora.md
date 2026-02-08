@@ -1,3 +1,6 @@
+---
+---
+
 # 10.2 LoRA (Low-Rank Adaptation)
 
 ## 핵심 용어 박스

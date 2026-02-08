@@ -1,3 +1,6 @@
+---
+---
+
 # 6.3 문서 이해 VLM
 
 > 문서 이해(Document Understanding)는 단순히 텍스트를 읽는 것이 아니라,

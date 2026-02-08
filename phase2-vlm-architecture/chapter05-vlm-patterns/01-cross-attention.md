@@ -1,3 +1,6 @@
+---
+---
+
 # 5.1 Cross-Attention 방식
 
 Vision-Language Model에서 Cross-Attention은 텍스트 토큰이 이미지 피처를 "질의"하여 시각 정보를 흡수하는 핵심 메커니즘이다. LLM의 각 레이어에 cross-attention 모듈을 삽입하거나, 별도의 어댑터 모듈(Q-Former)로 시각 정보를 압축해서 LLM에 전달한다.

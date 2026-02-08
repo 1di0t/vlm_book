@@ -1,3 +1,6 @@
+---
+---
+
 # 2.1 Self-Attention 메커니즘
 
 Self-Attention은 Transformer의 핵심이다. 시퀀스 내 모든 위치가 서로를 "주목"하여 문맥을 이해하는 메커니즘이다.

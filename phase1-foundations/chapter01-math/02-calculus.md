@@ -1,3 +1,6 @@
+---
+---
+
 # 1.2 미적분 (Calculus)
 
 신경망 학습의 핵심은 Gradient Descent다. Gradient를 계산하려면 미분이 필수고, 여러 층을 거치는 Backpropagation은 Chain Rule로 작동한다.

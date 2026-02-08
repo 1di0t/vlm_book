@@ -1,3 +1,6 @@
+---
+---
+
 # 2.2 Positional Encoding
 
 Self-Attention은 순서를 모른다. "I love you"와 "You love I"를 구분하려면 위치 정보가 필요하다.

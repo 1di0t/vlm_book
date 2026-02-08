@@ -1,3 +1,6 @@
+---
+---
+
 # 11.2 Mixed Precision Training
 
 ## 핵심 용어 박스

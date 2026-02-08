@@ -1,3 +1,6 @@
+---
+---
+
 # Phase 2: Vision & VLM 아키텍처
 
 이미지를 이해하는 AI의 핵심인 Vision Transformer(ViT)와 이를 언어 모델과 결합하는 VLM 아키텍처를 다룬다.

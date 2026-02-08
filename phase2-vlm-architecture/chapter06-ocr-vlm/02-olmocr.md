@@ -1,3 +1,6 @@
+---
+---
+
 # 6.2 OLMoCR 분석
 
 > **OLMoCR**은 Allen AI(AI2)가 2024년에 공개한 문서 OCR 특화 Vision-Language Model이다.

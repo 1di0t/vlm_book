@@ -1,3 +1,6 @@
+---
+---
+
 # 1.1 선형대수 (Linear Algebra)
 
 딥러닝의 모든 연산은 행렬과 벡터로 표현된다. Transformer의 Attention 메커니즘을 이해하려면 선형대수가 필수다.

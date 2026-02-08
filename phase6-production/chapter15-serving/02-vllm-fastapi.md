@@ -1,3 +1,6 @@
+---
+---
+
 # 15.2 vLLM + FastAPI 프로덕션 서빙
 
 vLLM은 PagedAttention 기반의 고성능 LLM 서빙 엔진이다. FastAPI와 결합하면 비동기 처리, OpenAI-compatible API, 스트리밍 응답을 모두 지원하는 프로덕션급 서빙 시스템을 구축할 수 있다.

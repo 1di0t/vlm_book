@@ -1,3 +1,6 @@
+---
+---
+
 # Phase 1: 딥러닝 & Transformer 기초
 
 VLM을 제대로 이해하고 튜닝하려면 기초가 탄탄해야 한다. 이 Phase에서는 Transformer의 핵심 개념부터 LLM의 동작 원리까지 다룬다.

@@ -1,3 +1,6 @@
+---
+---
+
 # 4.1 Patch Embedding
 
 이미지를 Transformer에 넣으려면 먼저 "토큰"으로 바꿔야 한다. NLP에서 문장을 토큰으로 분할하듯, ViT는 이미지를 고정 크기 패치로 분할한 뒤 벡터로 변환한다. 이 과정이 Patch Embedding이다.

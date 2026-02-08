@@ -1,3 +1,6 @@
+---
+---
+
 # 3.1 Tokenization
 
 LLM은 텍스트를 직접 처리하지 못한다. 먼저 토큰(숫자 ID)으로 변환해야 한다. 이 과정이 Tokenization이다.

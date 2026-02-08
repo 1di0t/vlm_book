@@ -1,3 +1,6 @@
+---
+---
+
 # 5.3 Early Fusion 방식
 
 Early Fusion은 이미지와 텍스트를 **초기 단계에서 하나의 시퀀스로 결합**하여 동일한 Transformer에 입력하는 방식이다. 별도의 Vision Encoder 없이, 이미지 패치를 직접 토큰화하여 텍스트 토큰과 함께 처리한다. Cross-Attention이나 Projection 방식과 달리 **모달리티 간 양방향 상호작용**이 모든 레이어에서 일어난다.
