@@ -5,3 +5,69 @@ markdown: kramdown
 kramdown:
   input: GFM
   syntax_highlighter: rouge
+  math_engine: mathjax
+
+exclude:
+  - nul
+  - "*.ipynb"
+  - node_modules
+  - vendor
+
+# Liquid 렌더링에서 제외할 경로 (LaTeX {{ }} 충돌 방지)
+defaults:
+  - scope:
+      path: "phase2-vlm-architecture"
+    values:
+      render_with_liquid: false
+  - scope:
+      path: "phase3-data-pipeline"
+    values:
+      render_with_liquid: false
+  - scope:
+      path: "phase4-finetuning"
+    values:
+      render_with_liquid: false
+  - scope:
+      path: "phase5-evaluation"
+    values:
+      render_with_liquid: false
+  - scope:
+      path: "phase6-production"
+    values:
+      render_with_liquid: false
+  - scope:
+      path: "phase1-foundations"
+    values:
+      render_with_liquid: false
+  - scope:
+      path: "appendix"
+    values:
+      render_with_liquid: false
+  - scope:
+      path: "01_딥러닝_Transformer_기초"
+    values:
+      render_with_liquid: false
+  - scope:
+      path: "02_Vision_VLM_아키텍처"
+    values:
+      render_with_liquid: false
+  - scope:
+      path: "03_데이터_파이프라인"
+    values:
+      render_with_liquid: false
+  - scope:
+      path: "04_Fine-tuning_실전"
+    values:
+      render_with_liquid: false
+  - scope:
+      path: "05_평가_최적화"
+    values:
+      render_with_liquid: false
+  - scope:
+      path: "06_프로덕션_배포"
+    values:
+      render_with_liquid: false
+  - scope:
+      path: "07_부록"
+    values:
+      render_with_liquid: false
