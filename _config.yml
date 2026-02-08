@@ -1,73 +1,30 @@
 title: VLM Book
 description: VLM(Vision Language Model) 학습 교재 - 딥러닝 기초부터 프로덕션 배포까지
-theme: jekyll-theme-minimal
+baseurl: /vlm_book
+url: https://1di0t.github.io
+
 markdown: kramdown
 kramdown:
   input: GFM
   syntax_highlighter: rouge
-  math_engine: mathjax
+  math_engine: null
 
 exclude:
   - nul
   - "*.ipynb"
   - node_modules
   - vendor
+  - Gemfile
+  - Gemfile.lock
+  - CLAUDE.md
 
-# Liquid 렌더링에서 제외할 경로 (LaTeX {{ }} 충돌 방지)
 defaults:
   - scope:
-      path: "phase2-vlm-architecture"
+      path: ""
     values:
+      layout: default
       render_with_liquid: false
   - scope:
-      path: "phase3-data-pipeline"
+      path: "index.md"
     values:
-      render_with_liquid: false
-  - scope:
-      path: "phase4-finetuning"
-    values:
-      render_with_liquid: false
-  - scope:
-      path: "phase5-evaluation"
-    values:
-      render_with_liquid: false
-  - scope:
-      path: "phase6-production"
-    values:
-      render_with_liquid: false
-  - scope:
-      path: "phase1-foundations"
-    values:
-      render_with_liquid: false
-  - scope:
-      path: "appendix"
-    values:
-      render_with_liquid: false
-  - scope:
-      path: "01_딥러닝_Transformer_기초"
-    values:
-      render_with_liquid: false
-  - scope:
-      path: "02_Vision_VLM_아키텍처"
-    values:
-      render_with_liquid: false
-  - scope:
-      path: "03_데이터_파이프라인"
-    values:
-      render_with_liquid: false
-  - scope:
-      path: "04_Fine-tuning_실전"
-    values:
-      render_with_liquid: false
-  - scope:
-      path: "05_평가_최적화"
-    values:
-      render_with_liquid: false
-  - scope:
-      path: "06_프로덕션_배포"
-    values:
-      render_with_liquid: false
-  - scope:
-      path: "07_부록"
-    values:
-      render_with_liquid: false
+      render_with_liquid: true

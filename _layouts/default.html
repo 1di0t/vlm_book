@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page.title | default: site.title }}</title>
+  <meta name="description" content="{{ site.description }}">
+
+  <!-- GitHub-like CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-dark.min.css">
+  <style>
+    :root {
+      --bg-primary: #0d1117;
+      --bg-secondary: #161b22;
+      --border-color: #30363d;
+      --text-primary: #e6edf3;
+      --text-secondary: #8b949e;
+      --accent: #58a6ff;
+      --accent-hover: #79c0ff;
+      --sidebar-width: 300px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Noto Sans, Helvetica, Arial, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    /* Top Navigation */
+    .top-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 48px;
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      z-index: 100;
+    }
+
+    .top-nav .logo {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .top-nav .logo span {
+      color: var(--accent);
+    }
+
+    .top-nav .nav-links {
+      margin-left: auto;
+      display: flex;
+      gap: 16px;
+    }
+
+    .top-nav .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+
+    .top-nav .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      top: 48px;
+      left: 0;
+      bottom: 0;
+      width: var(--sidebar-width);
+      background: var(--bg-secondary);
+      border-right: 1px solid var(--border-color);
+      overflow-y: auto;
+      padding: 16px 0;
+      font-size: 14px;
+      transition: transform 0.3s;
+      z-index: 50;
+    }
+
+    .sidebar::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb {
+      background: var(--border-color);
+      border-radius: 3px;
+    }
+
+    .sidebar .section-title {
+      padding: 8px 20px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-secondary);
+      margin-top: 8px;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 4px 20px 4px 28px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: all 0.15s;
+      border-left: 2px solid transparent;
+    }
+
+    .sidebar a:hover {
+      color: var(--text-primary);
+      background: rgba(88, 166, 255, 0.05);
+    }
+
+    .sidebar a.active {
+      color: var(--accent);
+      border-left-color: var(--accent);
+      background: rgba(88, 166, 255, 0.1);
+    }
+
+    /* Main Content */
+    .main-content {
+      margin-left: var(--sidebar-width);
+      margin-top: 48px;
+      padding: 32px 48px;
+      max-width: 960px;
+    }
+
+    .markdown-body {
+      background: transparent !important;
+      color: var(--text-primary) !important;
+    }
+
+    .markdown-body h1 { border-bottom: 1px solid var(--border-color); padding-bottom: 8px; }
+    .markdown-body h2 { border-bottom: 1px solid var(--border-color); padding-bottom: 6px; margin-top: 32px; }
+    .markdown-body h3 { margin-top: 24px; }
+
+    .markdown-body table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    .markdown-body table th,
+    .markdown-body table td {
+      border: 1px solid var(--border-color);
+      padding: 8px 12px;
+    }
+
+    .markdown-body table th {
+      background: var(--bg-secondary);
+    }
+
+    .markdown-body blockquote {
+      border-left: 3px solid var(--accent);
+      padding: 8px 16px;
+      background: rgba(88, 166, 255, 0.05);
+      color: var(--text-secondary);
+    }
+
+    .markdown-body code {
+      background: rgba(110, 118, 129, 0.2);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 85%;
+    }
+
+    .markdown-body pre {
+      background: var(--bg-secondary) !important;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 16px;
+      overflow-x: auto;
+    }
+
+    .markdown-body pre code {
+      background: transparent;
+      padding: 0;
+    }
+
+    .markdown-body a { color: var(--accent); }
+    .markdown-body a:hover { color: var(--accent-hover); text-decoration: underline; }
+
+    .markdown-body img {
+      max-width: 100%;
+      border-radius: 8px;
+    }
+
+    /* Checkbox styling */
+    .markdown-body input[type="checkbox"] {
+      margin-right: 6px;
+    }
+
+    /* Mobile */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-primary);
+      font-size: 20px;
+      cursor: pointer;
+      margin-right: 12px;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar { transform: translateX(-100%); }
+      .sidebar.open { transform: translateX(0); }
+      .main-content { margin-left: 0; padding: 24px 16px; }
+      .menu-toggle { display: block; }
+    }
+
+    /* MathJax overrides */
+    mjx-container {
+      overflow-x: auto;
+      overflow-y: hidden;
+    }
+
+    /* Mermaid */
+    .mermaid {
+      background: var(--bg-secondary);
+      border-radius: 8px;
+      padding: 16px;
+      text-align: center;
+    }
+  </style>
+
+  <!-- MathJax -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+
+  <!-- Mermaid -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'dark',
+      themeVariables: {
+        primaryColor: '#1f6feb',
+        primaryBorderColor: '#388bfd',
+        primaryTextColor: '#e6edf3',
+        lineColor: '#8b949e',
+        secondaryColor: '#161b22',
+        tertiaryColor: '#21262d',
+      }
+    });
+  </script>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <nav class="top-nav">
+    <button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776;</button>
+    <a href="{{ '/' | relative_url }}" class="logo">VLM <span>Book</span></a>
+    <div class="nav-links">
+      <a href="{{ '/SUMMARY' | relative_url }}">목차</a>
+      <a href="{{ '/appendix/D-glossary' | relative_url }}">용어사전</a>
+      <a href="https://github.com/1di0t/vlm_book" target="_blank">GitHub</a>
+    </div>
+  </nav>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="section-title">Phase 1: 기초</div>
+    <a href="{{ '/phase1-foundations/chapter01-math/01-linear-algebra' | relative_url }}">1.1 선형대수</a>
+    <a href="{{ '/phase1-foundations/chapter01-math/02-calculus' | relative_url }}">1.2 미적분</a>
+    <a href="{{ '/phase1-foundations/chapter01-math/03-probability' | relative_url }}">1.3 확률과 통계</a>
+    <a href="{{ '/phase1-foundations/chapter02-transformer/01-self-attention' | relative_url }}">2.1 Self-Attention</a>
+    <a href="{{ '/phase1-foundations/chapter02-transformer/02-positional-encoding' | relative_url }}">2.2 Positional Encoding</a>
+    <a href="{{ '/phase1-foundations/chapter02-transformer/03-transformer-block' | relative_url }}">2.3 Transformer Block</a>
+    <a href="{{ '/phase1-foundations/chapter02-transformer/04-encoder-decoder' | relative_url }}">2.4 Encoder-Decoder</a>
+    <a href="{{ '/phase1-foundations/chapter03-llm-basics/01-tokenization' | relative_url }}">3.1 Tokenization</a>
+    <a href="{{ '/phase1-foundations/chapter03-llm-basics/02-autoregressive' | relative_url }}">3.2 Autoregressive</a>
+    <a href="{{ '/phase1-foundations/chapter03-llm-basics/03-kv-cache' | relative_url }}">3.3 KV Cache</a>
+    <a href="{{ '/phase1-foundations/chapter03-llm-basics/04-inference' | relative_url }}">3.4 Inference</a>
+
+    <div class="section-title">Phase 2: Vision & VLM</div>
+    <a href="{{ '/phase2-vlm-architecture/chapter04-vit/01-patch-embedding' | relative_url }}">4.1 Patch Embedding</a>
+    <a href="{{ '/phase2-vlm-architecture/chapter04-vit/02-cls-position' | relative_url }}">4.2 CLS & Position</a>
+    <a href="{{ '/phase2-vlm-architecture/chapter04-vit/03-vit-variants' | relative_url }}">4.3 ViT Variants</a>
+    <a href="{{ '/phase2-vlm-architecture/chapter04-vit/04-vit-vs-cnn' | relative_url }}">4.4 ViT vs CNN</a>
+    <a href="{{ '/phase2-vlm-architecture/chapter05-vlm-patterns/01-cross-attention' | relative_url }}">5.1 Cross-Attention</a>
+    <a href="{{ '/phase2-vlm-architecture/chapter05-vlm-patterns/02-projection' | relative_url }}">5.2 Projection</a>
+    <a href="{{ '/phase2-vlm-architecture/chapter05-vlm-patterns/03-early-fusion' | relative_url }}">5.3 Early Fusion</a>
+    <a href="{{ '/phase2-vlm-architecture/chapter05-vlm-patterns/04-pattern-comparison' | relative_url }}">5.4 패턴 비교</a>
+    <a href="{{ '/phase2-vlm-architecture/chapter06-ocr-vlm/01-qwen2.5-vl' | relative_url }}">6.1 Qwen2.5-VL</a>
+    <a href="{{ '/phase2-vlm-architecture/chapter06-ocr-vlm/02-olmocr' | relative_url }}">6.2 OLMoCR</a>
+    <a href="{{ '/phase2-vlm-architecture/chapter06-ocr-vlm/03-document-vlm' | relative_url }}">6.3 문서 이해 VLM</a>
+    <a href="{{ '/phase2-vlm-architecture/chapter06-ocr-vlm/04-medical-ocr' | relative_url }}">6.4 의료 문서 OCR</a>
+
+    <div class="section-title">Phase 3: 데이터</div>
+    <a href="{{ '/phase3-data-pipeline/chapter07-data-collection/01-document-types' | relative_url }}">7.1 문서 유형 분류</a>
+    <a href="{{ '/phase3-data-pipeline/chapter07-data-collection/02-annotation' | relative_url }}">7.2 어노테이션</a>
+    <a href="{{ '/phase3-data-pipeline/chapter07-data-collection/03-quality-control' | relative_url }}">7.3 품질 관리</a>
+    <a href="{{ '/phase3-data-pipeline/chapter07-data-collection/04-privacy' | relative_url }}">7.4 개인정보 처리</a>
+    <a href="{{ '/phase3-data-pipeline/chapter08-synthetic-data/01-template-generation' | relative_url }}">8.1 템플릿 생성</a>
+    <a href="{{ '/phase3-data-pipeline/chapter08-synthetic-data/02-noise-augmentation' | relative_url }}">8.2 노이즈 & 변형</a>
+    <a href="{{ '/phase3-data-pipeline/chapter08-synthetic-data/03-preprinted-simulation' | relative_url }}">8.3 Pre-printed 시뮬레이션</a>
+    <a href="{{ '/phase3-data-pipeline/chapter08-synthetic-data/04-augmentation' | relative_url }}">8.4 데이터 증강</a>
+    <a href="{{ '/phase3-data-pipeline/chapter09-data-format/01-conversation-format' | relative_url }}">9.1 Conversation Format</a>
+    <a href="{{ '/phase3-data-pipeline/chapter09-data-format/02-efficient-loading' | relative_url }}">9.2 효율적 로딩</a>
+    <a href="{{ '/phase3-data-pipeline/chapter09-data-format/03-multi-resolution' | relative_url }}">9.3 Multi-resolution</a>
+
+    <div class="section-title">Phase 4: Fine-tuning</div>
+    <a href="{{ '/phase4-finetuning/chapter10-techniques/01-full-finetuning' | relative_url }}">10.1 Full Fine-tuning</a>
+    <a href="{{ '/phase4-finetuning/chapter10-techniques/02-lora' | relative_url }}">10.2 LoRA</a>
+    <a href="{{ '/phase4-finetuning/chapter10-techniques/03-qlora' | relative_url }}">10.3 QLoRA</a>
+    <a href="{{ '/phase4-finetuning/chapter10-techniques/04-freeze-strategy' | relative_url }}">10.4 Freeze 전략</a>
+    <a href="{{ '/phase4-finetuning/chapter11-infrastructure/01-distributed-training' | relative_url }}">11.1 분산 학습</a>
+    <a href="{{ '/phase4-finetuning/chapter11-infrastructure/02-mixed-precision' | relative_url }}">11.2 Mixed Precision</a>
+    <a href="{{ '/phase4-finetuning/chapter11-infrastructure/03-config-examples' | relative_url }}">11.3 Config 예시</a>
+    <a href="{{ '/phase4-finetuning/chapter11-infrastructure/04-monitoring' | relative_url }}">11.4 모니터링</a>
+    <a href="{{ '/phase4-finetuning/chapter12-training/01-sanity-check' | relative_url }}">12.1 Sanity Check</a>
+    <a href="{{ '/phase4-finetuning/chapter12-training/02-small-scale' | relative_url }}">12.2 Small Scale</a>
+    <a href="{{ '/phase4-finetuning/chapter12-training/03-full-scale' | relative_url }}">12.3 Full Scale</a>
+    <a href="{{ '/phase4-finetuning/chapter12-training/04-troubleshooting' | relative_url }}">12.4 트러블슈팅</a>
+
+    <div class="section-title">Phase 5: 평가 & 최적화</div>
+    <a href="{{ '/phase5-evaluation/chapter13-evaluation/01-ocr-metrics' | relative_url }}">13.1 OCR 메트릭</a>
+    <a href="{{ '/phase5-evaluation/chapter13-evaluation/02-structured-output' | relative_url }}">13.2 구조화 출력 평가</a>
+    <a href="{{ '/phase5-evaluation/chapter13-evaluation/03-medical-specific' | relative_url }}">13.3 의료 문서 평가</a>
+    <a href="{{ '/phase5-evaluation/chapter13-evaluation/04-human-evaluation' | relative_url }}">13.4 Human Evaluation</a>
+    <a href="{{ '/phase5-evaluation/chapter14-optimization/01-quantization' | relative_url }}">14.1 Quantization</a>
+    <a href="{{ '/phase5-evaluation/chapter14-optimization/02-kv-cache-optimization' | relative_url }}">14.2 KV Cache 최적화</a>
+    <a href="{{ '/phase5-evaluation/chapter14-optimization/03-inference-engines' | relative_url }}">14.3 추론 엔진</a>
+    <a href="{{ '/phase5-evaluation/chapter14-optimization/04-benchmark' | relative_url }}">14.4 벤치마크</a>
+
+    <div class="section-title">Phase 6: 프로덕션</div>
+    <a href="{{ '/phase6-production/chapter15-serving/01-architecture' | relative_url }}">15.1 서빙 아키텍처</a>
+    <a href="{{ '/phase6-production/chapter15-serving/02-vllm-fastapi' | relative_url }}">15.2 vLLM + FastAPI</a>
+    <a href="{{ '/phase6-production/chapter15-serving/03-batching' | relative_url }}">15.3 Batching 전략</a>
+    <a href="{{ '/phase6-production/chapter16-stability/01-health-check' | relative_url }}">16.1 Health Check</a>
+    <a href="{{ '/phase6-production/chapter16-stability/02-24h-stability' | relative_url }}">16.2 24시간 안정성</a>
+    <a href="{{ '/phase6-production/chapter16-stability/03-logging-monitoring' | relative_url }}">16.3 로깅 & 모니터링</a>
+    <a href="{{ '/phase6-production/chapter17-cicd/01-version-control' | relative_url }}">17.1 모델 버전 관리</a>
+    <a href="{{ '/phase6-production/chapter17-cicd/02-deployment-automation' | relative_url }}">17.2 배포 자동화</a>
+    <a href="{{ '/phase6-production/chapter17-cicd/03-rollback-strategy' | relative_url }}">17.3 Rollback 전략</a>
+
+    <div class="section-title">부록</div>
+    <a href="{{ '/appendix/A-environment-setup' | relative_url }}">A. 환경 설정</a>
+    <a href="{{ '/appendix/B-hardware-guide' | relative_url }}">B. 하드웨어 가이드</a>
+    <a href="{{ '/appendix/C-references' | relative_url }}">C. 참고 자료</a>
+    <a href="{{ '/appendix/D-glossary' | relative_url }}">D. 용어 사전</a>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <article class="markdown-body">
+      {{ content }}
+    </article>
+  </main>
+
+  <!-- Highlight active sidebar link -->
+  <script>
+    const currentPath = window.location.pathname;
+    document.querySelectorAll('.sidebar a').forEach(link => {
+      if (currentPath.includes(link.getAttribute('href'))) {
+        link.classList.add('active');
+      }
+    });
+  </script>
+</body>
+</html>
